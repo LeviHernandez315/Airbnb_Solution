@@ -19,5 +19,7 @@ namespace Domain.Entities
 
         public int Edad { get; set; }
         public DateTime FechaNacimiento { get; set; }
+
+        public List<Telefono> Telefono { get; set; } = new();
     }
 }
