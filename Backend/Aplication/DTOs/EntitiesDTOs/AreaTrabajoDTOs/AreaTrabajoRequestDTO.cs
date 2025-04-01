@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Common
+namespace Aplication.DTOs.Entities.AreaTrabajoDTOs
 {
-    public abstract class EntityCatalog
+    public class AreaTrabajoRequestDTO
     {
-        public int Id { get; set; }
         public string Descripcion { get; set; } = string.Empty;
     }
 }
