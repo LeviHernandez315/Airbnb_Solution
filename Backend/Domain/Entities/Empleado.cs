@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Domain.Common;
-using Domain.Entities;
 
-namespace Domain.AggregateRoots
+namespace Domain.Entities
 {
 
     public class Empleado : AggregateRoot

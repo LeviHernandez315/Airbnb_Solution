@@ -1,7 +1,6 @@
 ﻿using Domain.Common;
-using Domain.Entities;
 
-namespace Domain.AggregateRoots
+namespace Domain.Entities
 {
     public class Empresa: AggregateRoot
     {
