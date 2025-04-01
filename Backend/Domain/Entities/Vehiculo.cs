@@ -1,7 +1,7 @@
-﻿using Domain.Common;
-using Domain.Entities;
+﻿using Domain.AggregateRoots;
+using Domain.Common;
 
-namespace Domain.AggregateRoots
+namespace Domain.Entities
 
 {
     public class Vehiculo:AggregateRoot

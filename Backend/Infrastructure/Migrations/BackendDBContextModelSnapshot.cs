@@ -22,84 +22,6 @@ namespace Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("Domain.AggregateRoots.Empleado", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("DireccionId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Dni")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Password")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PuestoId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RolId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("Salario")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DireccionId");
-
-                    b.HasIndex("Dni");
-
-                    b.HasIndex("PuestoId");
-
-                    b.HasIndex("RolId");
-
-                    b.ToTable("Empleados");
-                });
-
-            modelBuilder.Entity("Domain.AggregateRoots.Empresa", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CasaMatriz")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Correo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Rtn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefono")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Empresa");
-                });
-
             modelBuilder.Entity("Domain.AggregateRoots.EncabezadoFactura", b =>
                 {
                     b.Property<int>("Id")
@@ -141,60 +63,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("IdUsuario");
 
                     b.ToTable("EncabezadoFacturas");
-                });
-
-            modelBuilder.Entity("Domain.AggregateRoots.Propiedad", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Capacidad")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CapacidadParqueo")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Descripcion")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("IdAnfitrion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdDireccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEstadoReserva")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("MediaValoracion")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Nombre")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("NumeroCamas")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NumeroHabitaciones")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("PrecioPorNoche")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdAnfitrion");
-
-                    b.HasIndex("IdDireccion");
-
-                    b.HasIndex("IdEstadoReserva");
-
-                    b.ToTable("Propiedades");
                 });
 
             modelBuilder.Entity("Domain.AggregateRoots.Reserva", b =>
@@ -248,6 +116,45 @@ namespace Infrastructure.Migrations
                     b.ToTable("Reservas");
                 });
 
+            modelBuilder.Entity("Domain.AggregateRoots.ReservaVehiculo", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("IdReserva")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdVehiculo")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("ImpuestoVehiculo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<decimal>("PrecioVehiculo")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int?>("ReservaId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("VehiculoId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdReserva");
+
+                    b.HasIndex("IdVehiculo");
+
+                    b.HasIndex("ReservaId");
+
+                    b.HasIndex("VehiculoId");
+
+                    b.ToTable("ReservasVehiculo");
+                });
+
             modelBuilder.Entity("Domain.AggregateRoots.Usuario", b =>
                 {
                     b.Property<int>("Id")
@@ -278,45 +185,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("RolId");
 
                     b.ToTable("Usuarios");
-                });
-
-            modelBuilder.Entity("Domain.AggregateRoots.Vehiculo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Año")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdDireccion")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdEstadoReserva")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdModelo")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdTipoVehiculo")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("PrecioDia")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdDireccion");
-
-                    b.HasIndex("IdEstadoReserva");
-
-                    b.HasIndex("IdModelo");
-
-                    b.HasIndex("IdTipoVehiculo");
-
-                    b.ToTable("Vehiculos");
                 });
 
             modelBuilder.Entity("Domain.Entities.AreaTrabajo", b =>
@@ -480,6 +348,84 @@ namespace Infrastructure.Migrations
                     b.ToTable("Direcciones");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Empleado", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("DireccionId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Dni")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PuestoId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RolId")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("Salario")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DireccionId");
+
+                    b.HasIndex("Dni");
+
+                    b.HasIndex("PuestoId");
+
+                    b.HasIndex("RolId");
+
+                    b.ToTable("Empleados");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Empresa", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CasaMatriz")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Correo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Rtn")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefono")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Empresa");
+                });
+
             modelBuilder.Entity("Domain.Entities.EstadoReserva", b =>
                 {
                     b.Property<int>("Id")
@@ -603,6 +549,60 @@ namespace Infrastructure.Migrations
                     b.ToTable("Personas");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Propiedad", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Capacidad")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CapacidadParqueo")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Descripcion")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("IdAnfitrion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdDireccion")
+                        .HasColumnType("int");
+
+                    b.Property<int>("IdEstadoReserva")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("MediaValoracion")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<string>("Nombre")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumeroCamas")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumeroHabitaciones")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("PrecioPorNoche")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdAnfitrion");
+
+                    b.HasIndex("IdDireccion");
+
+                    b.HasIndex("IdEstadoReserva");
+
+                    b.ToTable("Propiedades");
+                });
+
             modelBuilder.Entity("Domain.Entities.PuestoTrabajo", b =>
                 {
                     b.Property<int>("Id")
@@ -623,45 +623,6 @@ namespace Infrastructure.Migrations
                     b.HasIndex("IdArea");
 
                     b.ToTable("PuestosTrabajo");
-                });
-
-            modelBuilder.Entity("Domain.Entities.ReservaVehiculo", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("IdReserva")
-                        .HasColumnType("int");
-
-                    b.Property<int>("IdVehiculo")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("ImpuestoVehiculo")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("PrecioVehiculo")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<int?>("ReservaId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("VehiculoId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("IdReserva");
-
-                    b.HasIndex("IdVehiculo");
-
-                    b.HasIndex("ReservaId");
-
-                    b.HasIndex("VehiculoId");
-
-                    b.ToTable("ReservasVehiculo");
                 });
 
             modelBuilder.Entity("Domain.Entities.ReseñaPropiedad", b =>
@@ -866,44 +827,48 @@ namespace Infrastructure.Migrations
                     b.ToTable("Valoraciones");
                 });
 
-            modelBuilder.Entity("Domain.AggregateRoots.Empleado", b =>
+            modelBuilder.Entity("Domain.Entities.Vehiculo", b =>
                 {
-                    b.HasOne("Domain.Entities.Direccion", "Direccion")
-                        .WithMany()
-                        .HasForeignKey("DireccionId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
 
-                    b.HasOne("Domain.Entities.Persona", "Persona")
-                        .WithMany()
-                        .HasForeignKey("Dni")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.HasOne("Domain.Entities.PuestoTrabajo", "PuestoTrabajo")
-                        .WithMany()
-                        .HasForeignKey("PuestoId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<int>("Año")
+                        .HasColumnType("int");
 
-                    b.HasOne("Domain.Entities.Rol", "Rol")
-                        .WithMany()
-                        .HasForeignKey("RolId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                    b.Property<int>("IdDireccion")
+                        .HasColumnType("int");
 
-                    b.Navigation("Direccion");
+                    b.Property<int>("IdEstadoReserva")
+                        .HasColumnType("int");
 
-                    b.Navigation("Persona");
+                    b.Property<int>("IdModelo")
+                        .HasColumnType("int");
 
-                    b.Navigation("PuestoTrabajo");
+                    b.Property<int>("IdTipoVehiculo")
+                        .HasColumnType("int");
 
-                    b.Navigation("Rol");
+                    b.Property<decimal>("PrecioDia")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdDireccion");
+
+                    b.HasIndex("IdEstadoReserva");
+
+                    b.HasIndex("IdModelo");
+
+                    b.HasIndex("IdTipoVehiculo");
+
+                    b.ToTable("Vehiculos");
                 });
 
             modelBuilder.Entity("Domain.AggregateRoots.EncabezadoFactura", b =>
                 {
-                    b.HasOne("Domain.AggregateRoots.Empresa", "Empresa")
+                    b.HasOne("Domain.Entities.Empresa", "Empresa")
                         .WithMany()
                         .HasForeignKey("IdEmpresa")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -936,36 +901,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Usuario");
                 });
 
-            modelBuilder.Entity("Domain.AggregateRoots.Propiedad", b =>
-                {
-                    b.HasOne("Domain.AggregateRoots.Usuario", "Anfitrion")
-                        .WithMany()
-                        .HasForeignKey("IdAnfitrion")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Direccion", "Direccion")
-                        .WithMany()
-                        .HasForeignKey("IdDireccion")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.EstadoReserva", "EstadoReserva")
-                        .WithMany()
-                        .HasForeignKey("IdEstadoReserva")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Anfitrion");
-
-                    b.Navigation("Direccion");
-
-                    b.Navigation("EstadoReserva");
-                });
-
             modelBuilder.Entity("Domain.AggregateRoots.Reserva", b =>
                 {
-                    b.HasOne("Domain.AggregateRoots.Empleado", "EmpleadoLogistica")
+                    b.HasOne("Domain.Entities.Empleado", "EmpleadoLogistica")
                         .WithMany()
                         .HasForeignKey("IdEmpleadoLogistica")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -977,13 +915,13 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.AggregateRoots.Propiedad", "Propiedad")
+                    b.HasOne("Domain.Entities.Propiedad", "Propiedad")
                         .WithMany()
                         .HasForeignKey("IdPropiedad")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.AggregateRoots.Propiedad", null)
+                    b.HasOne("Domain.Entities.Propiedad", null)
                         .WithMany("Reserva")
                         .HasForeignKey("PropiedadId");
 
@@ -992,6 +930,33 @@ namespace Infrastructure.Migrations
                     b.Navigation("Huesped");
 
                     b.Navigation("Propiedad");
+                });
+
+            modelBuilder.Entity("Domain.AggregateRoots.ReservaVehiculo", b =>
+                {
+                    b.HasOne("Domain.AggregateRoots.Reserva", "Reserva")
+                        .WithMany()
+                        .HasForeignKey("IdReserva")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Vehiculo", "Vehiculo")
+                        .WithMany()
+                        .HasForeignKey("IdVehiculo")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.AggregateRoots.Reserva", null)
+                        .WithMany("ReservaVehiculos")
+                        .HasForeignKey("ReservaId");
+
+                    b.HasOne("Domain.Entities.Vehiculo", null)
+                        .WithMany("ReservaVehiculo")
+                        .HasForeignKey("VehiculoId");
+
+                    b.Navigation("Reserva");
+
+                    b.Navigation("Vehiculo");
                 });
 
             modelBuilder.Entity("Domain.AggregateRoots.Usuario", b =>
@@ -1011,41 +976,6 @@ namespace Infrastructure.Migrations
                     b.Navigation("Persona");
 
                     b.Navigation("Rol");
-                });
-
-            modelBuilder.Entity("Domain.AggregateRoots.Vehiculo", b =>
-                {
-                    b.HasOne("Domain.Entities.Direccion", "Direccion")
-                        .WithMany()
-                        .HasForeignKey("IdDireccion")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.EstadoReserva", "EstadoReserva")
-                        .WithMany()
-                        .HasForeignKey("IdEstadoReserva")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.Modelo", "Modelo")
-                        .WithMany()
-                        .HasForeignKey("IdModelo")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.Entities.TipoVehiculo", "TipoVehiculo")
-                        .WithMany()
-                        .HasForeignKey("IdTipoVehiculo")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Direccion");
-
-                    b.Navigation("EstadoReserva");
-
-                    b.Navigation("Modelo");
-
-                    b.Navigation("TipoVehiculo");
                 });
 
             modelBuilder.Entity("Domain.Entities.Ciudad", b =>
@@ -1119,6 +1049,41 @@ namespace Infrastructure.Migrations
                     b.Navigation("Ciudad");
                 });
 
+            modelBuilder.Entity("Domain.Entities.Empleado", b =>
+                {
+                    b.HasOne("Domain.Entities.Direccion", "Direccion")
+                        .WithMany()
+                        .HasForeignKey("DireccionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Persona", "Persona")
+                        .WithMany()
+                        .HasForeignKey("Dni")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.PuestoTrabajo", "PuestoTrabajo")
+                        .WithMany()
+                        .HasForeignKey("PuestoId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Rol", "Rol")
+                        .WithMany()
+                        .HasForeignKey("RolId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Direccion");
+
+                    b.Navigation("Persona");
+
+                    b.Navigation("PuestoTrabajo");
+
+                    b.Navigation("Rol");
+                });
+
             modelBuilder.Entity("Domain.Entities.Modelo", b =>
                 {
                     b.HasOne("Domain.Entities.Marca", "Marca")
@@ -1128,6 +1093,33 @@ namespace Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("Marca");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Propiedad", b =>
+                {
+                    b.HasOne("Domain.AggregateRoots.Usuario", "Anfitrion")
+                        .WithMany()
+                        .HasForeignKey("IdAnfitrion")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Direccion", "Direccion")
+                        .WithMany()
+                        .HasForeignKey("IdDireccion")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.EstadoReserva", "EstadoReserva")
+                        .WithMany()
+                        .HasForeignKey("IdEstadoReserva")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Anfitrion");
+
+                    b.Navigation("Direccion");
+
+                    b.Navigation("EstadoReserva");
                 });
 
             modelBuilder.Entity("Domain.Entities.PuestoTrabajo", b =>
@@ -1141,36 +1133,9 @@ namespace Infrastructure.Migrations
                     b.Navigation("Area");
                 });
 
-            modelBuilder.Entity("Domain.Entities.ReservaVehiculo", b =>
-                {
-                    b.HasOne("Domain.AggregateRoots.Reserva", "Reserva")
-                        .WithMany()
-                        .HasForeignKey("IdReserva")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.AggregateRoots.Vehiculo", "Vehiculo")
-                        .WithMany()
-                        .HasForeignKey("IdVehiculo")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Domain.AggregateRoots.Reserva", null)
-                        .WithMany("ReservaVehiculos")
-                        .HasForeignKey("ReservaId");
-
-                    b.HasOne("Domain.AggregateRoots.Vehiculo", null)
-                        .WithMany("ReservaVehiculo")
-                        .HasForeignKey("VehiculoId");
-
-                    b.Navigation("Reserva");
-
-                    b.Navigation("Vehiculo");
-                });
-
             modelBuilder.Entity("Domain.Entities.ReseñaPropiedad", b =>
                 {
-                    b.HasOne("Domain.AggregateRoots.Propiedad", "Propiedad")
+                    b.HasOne("Domain.Entities.Propiedad", "Propiedad")
                         .WithMany()
                         .HasForeignKey("IdPropiedad")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1188,7 +1153,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.AggregateRoots.Propiedad", null)
+                    b.HasOne("Domain.Entities.Propiedad", null)
                         .WithMany("ReseñaPropiedad")
                         .HasForeignKey("PropiedadId");
 
@@ -1213,13 +1178,13 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.AggregateRoots.Vehiculo", "Vehiculo")
+                    b.HasOne("Domain.Entities.Vehiculo", "Vehiculo")
                         .WithMany()
                         .HasForeignKey("IdVehiculo")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.AggregateRoots.Vehiculo", null)
+                    b.HasOne("Domain.Entities.Vehiculo", null)
                         .WithMany("ReseñaVehiculo")
                         .HasForeignKey("VehiculoId");
 
@@ -1232,7 +1197,7 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Domain.Entities.Sucursal", b =>
                 {
-                    b.HasOne("Domain.AggregateRoots.Empresa", null)
+                    b.HasOne("Domain.Entities.Empresa", null)
                         .WithMany("Sucursal")
                         .HasForeignKey("EmpresaId");
 
@@ -1242,7 +1207,7 @@ namespace Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Domain.AggregateRoots.Empresa", "Empresa")
+                    b.HasOne("Domain.Entities.Empresa", "Empresa")
                         .WithMany()
                         .HasForeignKey("IdEmpresa")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1268,21 +1233,44 @@ namespace Infrastructure.Migrations
                     b.Navigation("Persona");
                 });
 
-            modelBuilder.Entity("Domain.AggregateRoots.Empresa", b =>
+            modelBuilder.Entity("Domain.Entities.Vehiculo", b =>
                 {
-                    b.Navigation("Sucursal");
+                    b.HasOne("Domain.Entities.Direccion", "Direccion")
+                        .WithMany()
+                        .HasForeignKey("IdDireccion")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.EstadoReserva", "EstadoReserva")
+                        .WithMany()
+                        .HasForeignKey("IdEstadoReserva")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.Modelo", "Modelo")
+                        .WithMany()
+                        .HasForeignKey("IdModelo")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Domain.Entities.TipoVehiculo", "TipoVehiculo")
+                        .WithMany()
+                        .HasForeignKey("IdTipoVehiculo")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Direccion");
+
+                    b.Navigation("EstadoReserva");
+
+                    b.Navigation("Modelo");
+
+                    b.Navigation("TipoVehiculo");
                 });
 
             modelBuilder.Entity("Domain.AggregateRoots.EncabezadoFactura", b =>
                 {
                     b.Navigation("Detalles");
-                });
-
-            modelBuilder.Entity("Domain.AggregateRoots.Propiedad", b =>
-                {
-                    b.Navigation("Reserva");
-
-                    b.Navigation("ReseñaPropiedad");
                 });
 
             modelBuilder.Entity("Domain.AggregateRoots.Reserva", b =>
@@ -1292,16 +1280,28 @@ namespace Infrastructure.Migrations
                     b.Navigation("ReservaVehiculos");
                 });
 
-            modelBuilder.Entity("Domain.AggregateRoots.Vehiculo", b =>
+            modelBuilder.Entity("Domain.Entities.Empresa", b =>
                 {
-                    b.Navigation("ReservaVehiculo");
-
-                    b.Navigation("ReseñaVehiculo");
+                    b.Navigation("Sucursal");
                 });
 
             modelBuilder.Entity("Domain.Entities.Persona", b =>
                 {
                     b.Navigation("Telefono");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Propiedad", b =>
+                {
+                    b.Navigation("Reserva");
+
+                    b.Navigation("ReseñaPropiedad");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Vehiculo", b =>
+                {
+                    b.Navigation("ReservaVehiculo");
+
+                    b.Navigation("ReseñaVehiculo");
                 });
 #pragma warning restore 612, 618
         }
